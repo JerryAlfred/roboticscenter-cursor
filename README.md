@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Silicon Valley Robotics Center
 
 A modern, responsive website showcasing the Silicon Valley Robotics Center and featuring a comprehensive robot ranking system.
@@ -90,3 +91,7 @@ For questions about the Silicon Valley Robotics Center:
 ## 📄 License
 
 © 2024 DeepAware AI. All rights reserved.
+=======
+# roboticscenter-cursor
+only for cursor
+>>>>>>> 1e619e21178010cbc057e017d936b1bf57a1a3aa
