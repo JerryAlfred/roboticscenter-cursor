@@ -1,0 +1,29 @@
+{
+  "name": "silicon-valley-robotics-center",
+  "version": "1.0.0",
+  "description": "Silicon Valley Robotics Center website with comprehensive robot ranking system",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "deploy": "./deploy.sh"
+  },
+  "keywords": [
+    "robotics",
+    "website",
+    "rankings",
+    "silicon-valley",
+    "ai",
+    "robots"
+  ],
+  "author": "DeepAware AI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/silicon-valley-robotics-center.git"
+  },
+  "homepage": "https://YOUR_USERNAME.github.io/silicon-valley-robotics-center",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
