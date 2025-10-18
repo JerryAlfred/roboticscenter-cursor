@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Rankings - Silicon Valley Robotics Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="rankings-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h2>DeepAware AI</h2></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#dcim">DCIM</a></li>
+                <li><a href="index.html#robotics">Robotics</a></li>
+                <li><a href="rankings.html" class="active">Rankings</a></li>
+                <li><a href="index.html#news">News</a></li>
+                <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                <li><a href="index.html#careers">Careers</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html#pilot" class="btn-pilot">Join Pilot</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="rankings-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Robot Rankings</h1>
+                <p>Comprehensive rankings of the world's most advanced robots across different categories</p>
+                <div class="stats-overview">
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-robots">0</span>
+                        <span class="stat-label">Total Robots</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="categories-count">0</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="avg-score">0</span>
+                        <span class="stat-label">Avg Score</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters and Search -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search robots...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All Robots</button>
+                    <button class="filter-btn" data-category="humanoid">Humanoid</button>
+                    <button class="filter-btn" data-category="quadruped">Quadruped</button>
+                    <button class="filter-btn" data-category="service">Service</button>
+                </div>
+                <div class="sort-options">
+                    <select id="sort-select">
+                        <option value="score">Sort by Score</option>
+                        <option value="name">Sort by Name</option>
+                        <option value="manufacturer">Sort by Manufacturer</option>
+                        <option value="price">Sort by Price</option>
+                        <option value="year">Sort by Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rankings Grid -->
+    <section class="rankings-section">
+        <div class="container">
+            <div class="rankings-header">
+                <h2 id="rankings-title">All Robot Rankings</h2>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="rankings-grid" id="rankings-container">
+                <!-- Robot cards will be dynamically inserted here -->
+            </div>
+            
+            <div class="loading" id="loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading robots...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Overview -->
+    <section class="category-overview">
+        <div class="container">
+            <h2>Category Overview</h2>
+            <div class="category-stats" id="category-stats">
+                <!-- Category statistics will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>DeepAware AI</h3>
+                    <p>Accelerating robotics from lab to life</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="index.html#about">About</a></li>
+                            <li><a href="index.html#careers">Careers</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#dcim">DCIM</a></li>
+                            <li><a href="index.html#robotics">Robotics</a></li>
+                            <li><a href="index.html#pilot">Pilot Program</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="index.html#news">News</a></li>
+                            <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                            <li><a href="rankings.html">Robot Rankings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DeepAware AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="robots-data.js"></script>
+    <script src="rankings.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

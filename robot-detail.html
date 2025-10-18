@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Details - Silicon Valley Robotics Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="rankings-styles.css">
+    <link rel="stylesheet" href="detail-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h2>DeepAware AI</h2></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#dcim">DCIM</a></li>
+                <li><a href="index.html#robotics">Robotics</a></li>
+                <li><a href="rankings.html">Rankings</a></li>
+                <li><a href="index.html#news">News</a></li>
+                <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                <li><a href="index.html#careers">Careers</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html#pilot" class="btn-pilot">Join Pilot</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="rankings.html">Robot Rankings</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumb-robot">Robot Details</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Robot Detail Content -->
+    <main class="robot-detail-main">
+        <div class="container">
+            <div class="robot-detail-container" id="robot-detail-container">
+                <!-- Content will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Related Robots -->
+    <section class="related-robots" id="related-robots-section" style="display: none;">
+        <div class="container">
+            <h2>Related Robots</h2>
+            <div class="related-robots-grid" id="related-robots-grid">
+                <!-- Related robots will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>DeepAware AI</h3>
+                    <p>Accelerating robotics from lab to life</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="index.html#about">About</a></li>
+                            <li><a href="index.html#careers">Careers</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#dcim">DCIM</a></li>
+                            <li><a href="index.html#robotics">Robotics</a></li>
+                            <li><a href="index.html#pilot">Pilot Program</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="index.html#news">News</a></li>
+                            <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                            <li><a href="rankings.html">Robot Rankings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DeepAware AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="robots-data.js"></script>
+    <script src="robot-detail.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
