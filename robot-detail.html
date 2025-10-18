@@ -58,6 +58,68 @@
         </div>
     </main>
 
+    <!-- User Comments Section -->
+    <section class="comments-section">
+        <div class="container">
+            <div class="comments-header">
+                <h2>User Reviews & Comments</h2>
+                <div class="comments-stats" id="comments-stats">
+                    <!-- Comments stats will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Add Comment Form (for logged in users) -->
+            <div class="add-comment-form" id="add-comment-form" style="display: none;">
+                <h3>Share Your Experience</h3>
+                <form id="commentForm">
+                    <div class="comment-rating">
+                        <label>Your Rating:</label>
+                        <div class="rating-input">
+                            <input type="radio" id="comment-star5" name="rating" value="5">
+                            <label for="comment-star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="comment-star4" name="rating" value="4">
+                            <label for="comment-star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="comment-star3" name="rating" value="3">
+                            <label for="comment-star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="comment-star2" name="rating" value="2">
+                            <label for="comment-star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="comment-star1" name="rating" value="1">
+                            <label for="comment-star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="commentText" name="comment" rows="4" placeholder="Share your experience with this robot..." required></textarea>
+                    </div>
+                    <div class="comment-actions">
+                        <button type="button" class="btn-secondary" id="cancelComment">Cancel</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Review
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Login Prompt (for non-logged in users) -->
+            <div class="login-prompt" id="login-prompt">
+                <div class="login-prompt-content">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h3>Join the Discussion</h3>
+                    <p>Sign in to share your experience and read reviews from other robotics professionals</p>
+                    <a href="auth.html?return=robot-detail.html?id=" class="btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Sign In / Register
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Comments List -->
+            <div class="comments-list" id="comments-list">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+    </section>
+
     <!-- Related Robots -->
     <section class="related-robots" id="related-robots-section" style="display: none;">
         <div class="container">

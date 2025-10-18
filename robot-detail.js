@@ -9,6 +9,7 @@ class RobotDetailPage {
     init() {
         this.getRobotIdFromURL();
         this.loadRobotDetails();
+        this.setupCommentsSystem();
     }
 
     getRobotIdFromURL() {
@@ -44,6 +45,7 @@ class RobotDetailPage {
             this.renderRobotDetails();
             this.updateBreadcrumb();
             this.loadRelatedRobots();
+            this.loadComments();
         }, 500);
     }
 
@@ -239,6 +241,320 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+});
+
+    setupCommentsSystem() {
+        // Check if user is logged in
+        this.checkAuthStatus();
+        
+        // Setup comment form
+        document.getElementById('commentForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleCommentSubmit(e);
+        });
+
+        // Setup cancel comment button
+        document.getElementById('cancelComment')?.addEventListener('click', () => {
+            this.hideCommentForm();
+        });
+    }
+
+    checkAuthStatus() {
+        const authData = localStorage.getItem('robotics_auth') || sessionStorage.getItem('robotics_auth');
+        
+        if (authData) {
+            try {
+                const parsed = JSON.parse(authData);
+                const users = JSON.parse(localStorage.getItem('robotics_users') || '[]');
+                this.currentUser = users.find(u => u.id === parsed.userId);
+                
+                if (this.currentUser) {
+                    this.showCommentForm();
+                } else {
+                    this.showLoginPrompt();
+                }
+            } catch (error) {
+                this.showLoginPrompt();
+            }
+        } else {
+            this.showLoginPrompt();
+        }
+    }
+
+    showCommentForm() {
+        document.getElementById('add-comment-form').style.display = 'block';
+        document.getElementById('login-prompt').style.display = 'none';
+    }
+
+    showLoginPrompt() {
+        document.getElementById('add-comment-form').style.display = 'none';
+        document.getElementById('login-prompt').style.display = 'block';
+        
+        // Update login link with current robot ID
+        const loginLink = document.querySelector('#login-prompt a');
+        if (loginLink && this.robotId) {
+            loginLink.href = `auth.html?return=robot-detail.html?id=${this.robotId}`;
+        }
+    }
+
+    hideCommentForm() {
+        document.getElementById('commentForm').reset();
+        document.getElementById('add-comment-form').style.display = 'none';
+    }
+
+    async handleCommentSubmit(e) {
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        const commentData = {
+            rating: parseInt(formData.get('rating')),
+            comment: formData.get('comment')
+        };
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        this.setLoading(submitBtn, true);
+
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            const newComment = {
+                id: 'comment_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                robotId: this.robotId,
+                userId: this.currentUser.id,
+                userName: `${this.currentUser.firstName} ${this.currentUser.lastName}`,
+                userType: this.currentUser.userType,
+                comment: commentData.comment,
+                rating: commentData.rating,
+                createdAt: new Date().toISOString()
+            };
+
+            // Add to user's comments
+            if (!this.currentUser.comments) {
+                this.currentUser.comments = [];
+            }
+            this.currentUser.comments.push(newComment);
+
+            // Save to robot comments
+            this.saveRobotComment(newComment);
+
+            // Update users data
+            this.saveUsers();
+
+            this.showAlert('success', 'Review submitted successfully!');
+            this.hideCommentForm();
+            this.loadComments();
+
+        } catch (error) {
+            this.showAlert('error', 'Failed to submit review. Please try again.');
+        } finally {
+            this.setLoading(submitBtn, false);
+        }
+    }
+
+    loadComments() {
+        const comments = this.getRobotComments(this.robotId);
+        this.renderComments(comments);
+        this.updateCommentsStats(comments);
+    }
+
+    getRobotComments(robotId) {
+        const allComments = this.loadRobotComments();
+        return allComments[robotId] || [];
+    }
+
+    loadRobotComments() {
+        const stored = localStorage.getItem('robotics_comments');
+        return stored ? JSON.parse(stored) : {};
+    }
+
+    saveRobotComment(commentData) {
+        const robotComments = this.loadRobotComments();
+        if (!robotComments[commentData.robotId]) {
+            robotComments[commentData.robotId] = [];
+        }
+        robotComments[commentData.robotId].push(commentData);
+        localStorage.setItem('robotics_comments', JSON.stringify(robotComments));
+    }
+
+    saveUsers() {
+        const users = JSON.parse(localStorage.getItem('robotics_users') || '[]');
+        const userIndex = users.findIndex(u => u.id === this.currentUser.id);
+        if (userIndex !== -1) {
+            users[userIndex] = this.currentUser;
+        }
+        localStorage.setItem('robotics_users', JSON.stringify(users));
+    }
+
+    renderComments(comments) {
+        const commentsList = document.getElementById('comments-list');
+        if (!commentsList) return;
+
+        if (comments.length === 0) {
+            commentsList.innerHTML = `
+                <div class="empty-comments">
+                    <i class="fas fa-comments"></i>
+                    <h3>No reviews yet</h3>
+                    <p>Be the first to share your experience with this robot!</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Sort comments by date (newest first)
+        const sortedComments = comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        commentsList.innerHTML = sortedComments.map(comment => `
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-user">
+                        <div class="user-avatar">
+                            ${comment.userName.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="user-info">
+                            <h4>${comment.userName}</h4>
+                            <p>${this.formatUserType(comment.userType)}</p>
+                        </div>
+                    </div>
+                    <div class="comment-rating-display">
+                        <div class="stars">
+                            ${this.renderStars(comment.rating)}
+                        </div>
+                        <span class="comment-date">${this.formatDate(comment.createdAt)}</span>
+                    </div>
+                </div>
+                <div class="comment-content">
+                    ${comment.comment}
+                </div>
+                <div class="comment-actions">
+                    <button onclick="robotDetail.likeComment('${comment.id}')">
+                        <i class="fas fa-thumbs-up"></i> Helpful
+                    </button>
+                    <button onclick="robotDetail.reportComment('${comment.id}')">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    updateCommentsStats(comments) {
+        const statsContainer = document.getElementById('comments-stats');
+        if (!statsContainer) return;
+
+        const totalComments = comments.length;
+        let avgRating = 0;
+        
+        if (totalComments > 0) {
+            const totalRating = comments.reduce((sum, comment) => sum + (comment.rating || 0), 0);
+            avgRating = (totalRating / totalComments).toFixed(1);
+        }
+
+        statsContainer.innerHTML = `
+            <div class="stat-item">
+                <span class="stat-number">${totalComments}</span>
+                <span class="stat-label">Reviews</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">${avgRating}</span>
+                <span class="stat-label">Avg Rating</span>
+            </div>
+        `;
+    }
+
+    renderStars(rating) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<i class="fas fa-star ${i <= rating ? '' : 'empty'}"></i>`;
+        }
+        return stars;
+    }
+
+    formatUserType(userType) {
+        const typeMap = {
+            'researcher': 'Robotics Researcher',
+            'engineer': 'Robotics Engineer',
+            'student': 'Student',
+            'enthusiast': 'Robotics Enthusiast',
+            'business': 'Business Professional',
+            'other': 'Other'
+        };
+        return typeMap[userType] || 'User';
+    }
+
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    likeComment(commentId) {
+        // Implementation for liking comments
+        this.showAlert('info', 'Like functionality coming soon!');
+    }
+
+    reportComment(commentId) {
+        // Implementation for reporting comments
+        this.showAlert('info', 'Report functionality coming soon!');
+    }
+
+    setLoading(button, loading) {
+        if (loading) {
+            button.classList.add('loading');
+            button.disabled = true;
+            const icon = button.querySelector('i');
+            if (icon) {
+                icon.className = 'fas fa-spinner fa-spin';
+            }
+        } else {
+            button.classList.remove('loading');
+            button.disabled = false;
+            const icon = button.querySelector('i');
+            if (icon) {
+                icon.className = 'fas fa-paper-plane';
+            }
+        }
+    }
+
+    showAlert(type, message) {
+        // Remove existing alerts
+        const existingAlerts = document.querySelectorAll('.alert');
+        existingAlerts.forEach(alert => alert.remove());
+
+        // Create new alert
+        const alert = document.createElement('div');
+        alert.className = `alert ${type}`;
+        
+        const icon = type === 'success' ? 'fa-check-circle' : 
+                    type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+        
+        alert.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <span>${message}</span>
+        `;
+
+        // Insert at the top of the comments section
+        const commentsSection = document.querySelector('.comments-section .container');
+        if (commentsSection) {
+            commentsSection.insertBefore(alert, commentsSection.firstChild);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+    }
+}
+
+// Initialize detail page when DOM is loaded
+let robotDetail;
+document.addEventListener('DOMContentLoaded', () => {
+    robotDetail = new RobotDetailPage();
 });
 
 // Add back button functionality

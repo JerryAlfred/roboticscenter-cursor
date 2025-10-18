@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - Silicon Valley Robotics Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h2>DeepAware AI</h2></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#dcim">DCIM</a></li>
+                <li><a href="index.html#robotics">Robotics</a></li>
+                <li><a href="rankings.html">Rankings</a></li>
+                <li><a href="index.html#news">News</a></li>
+                <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                <li><a href="index.html#careers">Careers</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="auth.html" class="btn-pilot">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Container -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <!-- Login Form -->
+                <div class="auth-form" id="login-form">
+                    <div class="auth-header">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to your account to add comments and reviews</p>
+                    </div>
+                    
+                    <form class="form" id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" name="email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" name="password" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox">
+                                <input type="checkbox" id="rememberMe">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+                        
+                        <div class="auth-switch">
+                            <p>Don't have an account? <a href="#" id="showRegister">Create one here</a></p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div class="auth-form" id="register-form" style="display: none;">
+                    <div class="auth-header">
+                        <h2>Join Our Community</h2>
+                        <p>Create an account to share your robot reviews and insights</p>
+                    </div>
+                    
+                    <form class="form" id="registerForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                                <i class="fas fa-user"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">Email Address</label>
+                            <input type="email" id="registerEmail" name="email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" name="password" required minlength="6">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="userType">I am a:</label>
+                            <select id="userType" name="userType" required>
+                                <option value="">Select your role</option>
+                                <option value="researcher">Robotics Researcher</option>
+                                <option value="engineer">Robotics Engineer</option>
+                                <option value="student">Student</option>
+                                <option value="enthusiast">Robotics Enthusiast</option>
+                                <option value="business">Business Professional</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox">
+                                <input type="checkbox" id="agreeTerms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                        
+                        <div class="auth-switch">
+                            <p>Already have an account? <a href="#" id="showLogin">Sign in here</a></p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Features Panel -->
+                <div class="auth-features">
+                    <h3>Join Our Robotics Community</h3>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-comments"></i>
+                            <div>
+                                <h4>Share Reviews</h4>
+                                <p>Add your own comments and reviews for robots</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-star"></i>
+                            <div>
+                                <h4>Rate Robots</h4>
+                                <p>Rate robots based on your experience</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Connect with Experts</h4>
+                                <p>Interact with other robotics professionals</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bookmark"></i>
+                            <div>
+                                <h4>Save Favorites</h4>
+                                <p>Bookmark your favorite robots and reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>DeepAware AI</h3>
+                    <p>Accelerating robotics from lab to life</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="index.html#about">About</a></li>
+                            <li><a href="index.html#careers">Careers</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#dcim">DCIM</a></li>
+                            <li><a href="index.html#robotics">Robotics</a></li>
+                            <li><a href="index.html#pilot">Pilot Program</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="index.html#news">News</a></li>
+                            <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                            <li><a href="rankings.html">Robot Rankings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DeepAware AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Silicon Valley Robotics Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h2>DeepAware AI</h2></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#dcim">DCIM</a></li>
+                <li><a href="index.html#robotics">Robotics</a></li>
+                <li><a href="rankings.html">Rankings</a></li>
+                <li><a href="index.html#news">News</a></li>
+                <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                <li><a href="index.html#careers">Careers</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li class="user-menu">
+                    <div class="user-dropdown">
+                        <button class="user-btn" id="userBtn">
+                            <i class="fas fa-user"></i>
+                            <span id="userName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="userDropdown">
+                            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="profile.html"><i class="fas fa-user-edit"></i> Profile</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Welcome back, <span id="welcomeName">User</span>!</h1>
+                    <p>Manage your robot reviews, favorites, and community activity</p>
+                </div>
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalComments">0</span>
+                            <span class="stat-label">Reviews</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="avgRating">0</span>
+                            <span class="stat-label">Avg Rating</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalFavorites">0</span>
+                            <span class="stat-label">Favorites</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Tabs -->
+            <section class="dashboard-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="reviews">My Reviews</button>
+                    <button class="tab-btn" data-tab="favorites">Favorites</button>
+                    <button class="tab-btn" data-tab="activity">Activity</button>
+                    <button class="tab-btn" data-tab="profile">Profile</button>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-content active" id="reviews-tab">
+                    <div class="tab-header">
+                        <h2>My Robot Reviews</h2>
+                        <button class="btn-primary" id="addReviewBtn">
+                            <i class="fas fa-plus"></i>
+                            Add Review
+                        </button>
+                    </div>
+                    <div class="reviews-list" id="reviewsList">
+                        <!-- Reviews will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Favorites Tab -->
+                <div class="tab-content" id="favorites-tab">
+                    <div class="tab-header">
+                        <h2>My Favorite Robots</h2>
+                    </div>
+                    <div class="favorites-grid" id="favoritesGrid">
+                        <!-- Favorites will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Activity Tab -->
+                <div class="tab-content" id="activity-tab">
+                    <div class="tab-header">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <div class="activity-timeline" id="activityTimeline">
+                        <!-- Activity will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div class="tab-content" id="profile-tab">
+                    <div class="tab-header">
+                        <h2>Profile Settings</h2>
+                    </div>
+                    <div class="profile-form">
+                        <form id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profileFirstName">First Name</label>
+                                    <input type="text" id="profileFirstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileLastName">Last Name</label>
+                                    <input type="text" id="profileLastName" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email Address</label>
+                                <input type="email" id="profileEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileUserType">Role</label>
+                                <select id="profileUserType" name="userType" required>
+                                    <option value="researcher">Robotics Researcher</option>
+                                    <option value="engineer">Robotics Engineer</option>
+                                    <option value="student">Student</option>
+                                    <option value="enthusiast">Robotics Enthusiast</option>
+                                    <option value="business">Business Professional</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBio">Bio (Optional)</label>
+                                <textarea id="profileBio" name="bio" rows="4" placeholder="Tell us about your robotics experience..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-save"></i>
+                                Save Changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Review Modal -->
+    <div class="modal" id="addReviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Robot Review</h3>
+                <button class="modal-close" id="closeReviewModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addReviewForm">
+                    <div class="form-group">
+                        <label for="reviewRobot">Select Robot</label>
+                        <select id="reviewRobot" name="robotId" required>
+                            <option value="">Choose a robot to review</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <div class="rating-input">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Your Review</label>
+                        <textarea id="reviewComment" name="comment" rows="5" placeholder="Share your experience with this robot..." required></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" id="cancelReview">Cancel</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Review
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>DeepAware AI</h3>
+                    <p>Accelerating robotics from lab to life</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="index.html#about">About</a></li>
+                            <li><a href="index.html#careers">Careers</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#dcim">DCIM</a></li>
+                            <li><a href="index.html#robotics">Robotics</a></li>
+                            <li><a href="index.html#pilot">Pilot Program</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="index.html#news">News</a></li>
+                            <li><a href="index.html#knowledge">Knowledge Base</a></li>
+                            <li><a href="rankings.html">Robot Rankings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DeepAware AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="robots-data.js"></script>
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
